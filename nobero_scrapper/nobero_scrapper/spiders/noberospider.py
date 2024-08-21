@@ -1,5 +1,8 @@
 import scrapy
 import re
+from products.models import Product
+from asgiref.sync import sync_to_async
+
 
 class NoberospiderSpider(scrapy.Spider):
     name = "noberospider"
@@ -19,25 +22,26 @@ class NoberospiderSpider(scrapy.Spider):
         for url in product_urls:
             clean_url = url.strip()
             yield response.follow(clean_url, self.parse_product, meta={'category': category})
-    def parse_product(self, response):
+    async def parse_product(self, response):
         category = response.meta['category']
-        yield{
-            'category': category,
-            'url' : response.url,
-            'image-url': self.extract_image_url(response),
-            'title': response.css('main h1.capitalize::text').get().strip(),
-            'price': response.css('main h2#variant-price spanclass::text').get().strip(),
-            'MRP': response.css('main h2.font-intermediumtext-sm').get().replace('<h2 class="font-intermediumtext-sm md:text-base text-[#676767]">\n      MRP:\n      <span id="variant-compare-at-price" class="line-through"><spanclass>','').replace('</spanclass></span>\n    </h2>', ''),
-            'last_7_day_sale': self.extract_last_7_day_sale(response),
-            'fit': self.extract_metafield(response, "Fit"),
-            'fabric': self.extract_metafield(response, "Fabric"),
-            'neck': self.extract_metafield(response, "Neck"),
-            'sleeve': self.extract_metafield(response, "Sleeve"),
-            'pattern': self.extract_metafield(response, "Pattern"),
-            'length': self.extract_metafield(response, "Length"),
-            'description': self.extract_description(response),
+        product = Product(
+            category= category,
+            url =response.url,
+            image_url= self.extract_image_url(response),
+            title= response.css('main h1.capitalize::text').get().strip(),
+            price= response.css('main h2#variant-price spanclass::text').get().strip(),
+            mrp= response.css('main h2.font-intermediumtext-sm').get().replace('<h2 class="font-intermediumtext-sm md:text-base text-[#676767]">\n      MRP:\n      <span id="variant-compare-at-price" class="line-through"><spanclass>','').replace('</spanclass></span>\n    </h2>', ''),
+            last_7_day_sale= self.extract_last_7_day_sale(response),
+            fit= self.extract_metafield(response, "Fit"),
+            fabric= self.extract_metafield(response, "Fabric"),
+            neck= self.extract_metafield(response, "Neck"),
+            sleeve= self.extract_metafield(response, "Sleeve"),
+            pattern= self.extract_metafield(response, "Pattern"),
+            length= self.extract_metafield(response, "Length"),
+            description= self.extract_description(response),
             
-        }
+        )
+        await sync_to_async(product.save)()
     def extract_last_7_day_sale(self, response):
         raw_text = response.css('main div.product_bought_count span::text').get()
         if raw_text:

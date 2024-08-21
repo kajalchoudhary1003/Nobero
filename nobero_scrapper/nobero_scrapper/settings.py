@@ -7,6 +7,8 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
+
+
 BOT_NAME = "nobero_scrapper"
 
 SPIDER_MODULES = ["nobero_scrapper.spiders"]
@@ -91,3 +93,13 @@ ROBOTSTXT_OBEY = True
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
+
+# fil path directory for django 
+import sys
+import os
+import django
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'backend'))
+os.environ['DJANGO_SETTINGS_MODULE'] = 'nobero_backend.settings'
+django.setup()
+
