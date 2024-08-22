@@ -42,3 +42,6 @@ Thumbs.db
 
 # python3 -m venv myenv
 # source myenv/bin/activate
+
+#python manage.py runserver
+# scrapy crawl noberospider
