@@ -228,34 +228,34 @@ export default async function ProductDetail({ params }) {
                 <div className=" basis-1/2 flex-col">
                   <div>
                     <h1 className="text-slate-500">Fit</h1>
-                    <h2>{product.fit}</h2>
+                    <h2>{product.fit || 'NA'}</h2>
                     <div className="bg-slate-300 h-[1px] mt-2 mb-3"></div>
                   </div>
                   <div>
                     <h1 className="text-slate-500">Neck</h1>
-                    <h2>{product.neck}</h2>
+                    <h2>{product.neck || 'NA'}</h2>
                     <div className="bg-slate-300 h-[1px] mt-2 mb-3"></div>
                   </div>
                   <div>
                     <h1 className="text-slate-500">Pattern</h1>
-                    <h2>{product.pattern}</h2>
+                    <h2>{product.pattern || 'NA'}</h2>
                     <div className="bg-slate-300 h-[1px] mt-2 mb-3"></div>
                   </div>
                 </div>
                 <div className="basis-1/2 flex-col">
                   <div>
                     <h1 className="text-slate-500">Fabric</h1>
-                    <h2>{product.fabric}</h2>
+                    <h2>{product.fabric || 'NA'}</h2>
                     <div className="bg-slate-300 h-[1px] mt-2 mb-3"></div>
                   </div>
                   <div>
                     <h1 className="text-slate-500">Sleeve</h1>
-                    <h2>{product.sleeve}</h2>
+                    <h2>{product.sleeve || 'NA'}</h2>
                     <div className="bg-slate-300 h-[1px] mt-2 mb-3"></div>
                   </div>
                   <div>
                     <h1 className="text-slate-500">Length</h1>
-                    <h2>{product.length}</h2>
+                    <h2>{product.length || 'NA'}</h2>
                     <div className="bg-slate-300 h-[1px] mt-2 mb-3"></div>
                   </div>
                 </div>
