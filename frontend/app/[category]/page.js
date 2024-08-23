@@ -99,20 +99,41 @@ function CategoryPage({ params }) {
       </div>
       <div className="divider container">
         <div className="filter flex">
-<SideFilter className="basis-1/4" />
-<div>
-
-</div>
+          {/* sidebar */}
+          <SideFilter className="basis-1/4" />
+          {/* products */}
+          <div className="prod basis-3/4 flex flex-wrap gap-4 ml-10 mb-20">
+            {products.length > 0 ? (
+              products.map((product) => (
+                <div>
+                  <div key={product.id}>
+                    <div className="relative w-60 h-80">
+                      <Image
+                        src={product.image_url}
+                        layout="fill"
+                        objectFit="contain" // or use "contain" depending on your needs
+                        alt={product.title}
+                      />
+                    </div>
+                    <h1>{product.title}</h1>
+                    <div className="prices flex space-x-2">
+                      <h1>{product.price}</h1>
+                      <h1 className=" line-through text-[#818181]">
+                        {product.mrp}
+                      </h1>
+                    </div>
+                    <h1 className="text-green-700">
+                      Lowest price in last 30 days
+                    </h1>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p>No products found.</p>
+            )}
+          </div>
         </div>
       </div>
-
-      <ul>
-        {products.length > 0 ? (
-          products.map((product) => <li key={product.id}>{product.title}</li>)
-        ) : (
-          <p>No products found.</p>
-        )}
-      </ul>
     </div>
   );
 }
