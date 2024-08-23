@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
 import Category from "@/components/Category";
 
-export default function Home() {
+export default function Home({params}) {
   return (
     <div>
       <Header />
@@ -14,7 +14,7 @@ export default function Home() {
           Shop Men
         </h1>
       </div>
-      <Category />
+      <Category params={params} />
     </div>
   );
 }
