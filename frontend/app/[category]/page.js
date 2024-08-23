@@ -107,7 +107,7 @@ function CategoryPage({ params }) {
           {/* sidebar */}
           <SideFilter className="basis-1/4" />
           {/* products */}
-          <div className="prod basis-3/4 flex flex-wrap gap-4 ml-10 mb-20">
+          <div className="prod basis-3/4 flex flex-wrap gap-10 ml-10 mb-20">
             {products.length > 0 ? (
               products.map((product) => (
                 <div>
