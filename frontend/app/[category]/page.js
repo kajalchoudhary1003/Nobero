@@ -18,7 +18,7 @@ const categoryHeadings = {
 
 function CategoryPage({ params }) {
   const [products, setProducts] = useState([]);
-
+  const router = useRouter();
   const { category } = params;
 
   // Decode the category value
@@ -57,6 +57,11 @@ function CategoryPage({ params }) {
 
     fetchProducts();
   }, [category]);
+
+  // Handle product click
+  const handleProductClick = (id) => {
+    router.push(`/products/${id}`);
+  };
   return (
     <div>
       <Header />
@@ -106,12 +111,16 @@ function CategoryPage({ params }) {
             {products.length > 0 ? (
               products.map((product) => (
                 <div>
-                  <div key={product.id}>
+                  <div
+                    key={product.id}
+                    className=" cursor-pointer"
+                    onClick={() => handleProductClick(product.id)}
+                  >
                     <div className="relative w-60 h-80">
                       <Image
                         src={product.image_url}
                         layout="fill"
-                        objectFit="contain" // or use "contain" depending on your needs
+                        objectFit="contain"
                         alt={product.title}
                       />
                     </div>
