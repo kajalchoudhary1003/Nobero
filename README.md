@@ -1,5 +1,3 @@
-# Nobero
-
 # Nobero Project
 
 This repository contains a web scraping tool, a Django backend, and a Next.js frontend. The project is designed to scrape product data from the Nobero website, store the data in a Django-based API, and display it in a React-based frontend.
